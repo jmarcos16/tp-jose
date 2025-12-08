@@ -27,6 +27,7 @@ class Task extends Model
     protected function casts(): array
     {
         return [
+            'completed' => 'boolean',
             'difficulty' => DifficultyEnum::class,
         ];
     }
