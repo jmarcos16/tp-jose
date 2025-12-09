@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #0a0a0a;
+  --color-foreground: #e5e7eb;
+  --color-primary: #137fec;
+  --color-primary-foreground: #ffffff;
+  --color-muted: rgba(255, 255, 255, 0.05);
+  --color-muted-foreground: #9ca3af;
+  --color-destructive: #ef4444;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-input: rgba(255, 255, 255, 0.05);
+  --color-ring: #137fec;
+  --font-sans: "Inter", sans-serif;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+body {
+  background: #0a0a0a;
+  color: #e5e7eb;
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+}
+
+.glassmorphism-bg {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.glassmorphism-input {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.glassmorphism-border {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glassmorphism-hover:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.glassmorphism-active {
+  background: rgba(21, 127, 236, 0.15);
+  border-color: rgba(21, 127, 236, 0.5);
+}
+
+.shadow-glass {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.glow-primary {
+  box-shadow: 0 0 20px rgba(19, 127, 236, 0.3);
+}
