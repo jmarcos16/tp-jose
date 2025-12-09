@@ -5,6 +5,7 @@ import { Task } from '@/types';
 import { taskService } from '@/lib/services';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
+import { ConfirmDialog } from '@/components/ui/dialog';
 
 interface TaskItemProps {
   task: Task;
@@ -20,6 +21,7 @@ const difficultyConfig = {
 
 export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
   const [loading, setLoading] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
   const handleToggle = async () => {
     setLoading(true);
@@ -38,31 +40,46 @@ export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
       onDelete(task.id);
     } finally {
       setLoading(false);
+      setShowDeleteDialog(false);
     }
   };
 
   const config = difficultyConfig[task.difficulty];
 
   return (
-    <div className="flex items-center gap-4 pt-4 first:pt-0">
-      <Checkbox
-        checked={task.completed}
-        onChange={handleToggle}
-        disabled={loading}
-      />
-      <div className="flex-grow">
-        <p className={`text-sm font-medium ${task.completed ? 'text-gray-400 line-through' : 'text-white'}`}>
-          {task.title}
-        </p>
+    <>
+      <div className="flex items-center gap-4 pt-4 first:pt-0">
+        <Checkbox
+          checked={task.completed}
+          onChange={handleToggle}
+          disabled={loading}
+        />
+        <div className="flex-grow">
+          <p className={`text-sm font-medium ${task.completed ? 'text-gray-400 line-through' : 'text-white'}`}>
+            {task.title}
+          </p>
+        </div>
+        <Badge variant={config.variant}>{config.label}</Badge>
+        <button
+          onClick={() => setShowDeleteDialog(true)}
+          disabled={loading}
+          className="text-gray-400 hover:text-red-400 transition-colors text-sm"
+        >
+          Excluir
+        </button>
       </div>
-      <Badge variant={config.variant}>{config.label}</Badge>
-      <button
-        onClick={handleDelete}
-        disabled={loading}
-        className="text-gray-400 hover:text-red-400 transition-colors text-sm"
-      >
-        Excluir
-      </button>
-    </div>
+
+      <ConfirmDialog
+        open={showDeleteDialog}
+        onOpenChange={setShowDeleteDialog}
+        title="Excluir tarefa"
+        description={`Tem certeza que deseja excluir a tarefa "${task.title}"? Esta ação não pode ser desfeita.`}
+        confirmLabel="Excluir"
+        cancelLabel="Cancelar"
+        onConfirm={handleDelete}
+        loading={loading}
+        variant="destructive"
+      />
+    </>
   );
 }
