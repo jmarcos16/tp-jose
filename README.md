@@ -71,13 +71,19 @@ Aguarde todos os containers estarem saudáveis:
 docker compose ps
 ```
 
-### 4. Executar migrations
+### 4. Gerar chave da aplicação
+
+```bash
+docker compose exec backend php artisan key:generate
+```
+
+### 5. Executar migrations
 
 ```bash
 docker compose exec backend php artisan migrate
 ```
 
-### 5. (Opcional) Popular com dados de teste
+### 6. (Opcional) Popular com dados de teste
 
 ```bash
 docker compose exec backend php artisan db:seed
