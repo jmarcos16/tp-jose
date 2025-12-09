@@ -56,7 +56,7 @@ cd tp-jose
 ### 2. Configurar variáveis de ambiente
 
 ```bash
-cp .env.example .env
+cp backend/.env.example backend/.env
 ```
 
 ### 3. Subir os containers
